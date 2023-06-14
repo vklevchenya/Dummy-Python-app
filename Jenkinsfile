@@ -31,7 +31,7 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                bat "pytest -n ${params.THREADS_COUNTER} -k '${params.TESTS_SCOPE}' --junitxml=out_report.xml"
+                bat "python -m unittest discover"
             }
         }
 
