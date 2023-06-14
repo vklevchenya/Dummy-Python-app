@@ -19,7 +19,7 @@ pipeline {
         stages {
         stage('Checkout App') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/your/repo.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/vklevchenya/Dummy-Python-app.git']]])
             }
         }
 
