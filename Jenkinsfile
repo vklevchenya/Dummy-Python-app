@@ -46,29 +46,29 @@ pipeline {
         }
 
         // Clean-up test data
-        stage('Clean-up test data') {
-            // environment {
-            //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
-            // }
-            // steps {
-            //     container('pytest3') {
-            //         //sh(script: "python3 test_data_cleanup.py", returnStdout: true)
-            //     }
-            // }
-        }
+        // stage('Clean-up test data') {
+        //     // environment {
+        //     //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
+        //     // }
+        //     // steps {
+        //     //     container('pytest3') {
+        //     //         //sh(script: "python3 test_data_cleanup.py", returnStdout: true)
+        //     //     }
+        //     // }
+        // }
         // Process failures, remove artifacts and prepare data for Slack notification
-        stage('Finalize run') {
-            // environment {
-            //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
-            // }
-            // steps {
-            //     container('pytest3') {
-            //         script {
-            //             failed_tests_content = sh(script: "python3 post_processing.py", returnStdout: true).trim()
-            //         }
-            //     }
-            // }
-        }
+        // stage('Finalize run') {
+        //     // environment {
+        //     //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
+        //     // }
+        //     // steps {
+        //     //     container('pytest3') {
+        //     //         script {
+        //     //             failed_tests_content = sh(script: "python3 post_processing.py", returnStdout: true).trim()
+        //     //         }
+        //     //     }
+        //     // }
+        // }
     }
 
         // Post-execution steps: store report and send Slack notification in case, if build is failed
