@@ -1,0 +1,38 @@
+image: python:3.10-alpine
+
+stages:
+  - deploy
+  - test
+
+build:
+  stage: deploy
+  script:
+    - pip install -r requirements.txt
+  artifacts:
+    paths:
+    - public/
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - pytest -n 2 --junitxml=report.xml
+
+slack_notification:
+  stage: notify
+  script:
+    - curl -X POST -H 'Content-type: application/json' --data '{"text":"Pipeline status: $CI_PIPELINE_URL"}' $SLACK_WEBHOOK
+  only:
+    - pipelines
+
+  artifacts:
+    when: always
+    paths:
+      - assets/*
+      - test_report.html    
+    reports:
+      junit: test_report.html
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
