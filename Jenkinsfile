@@ -32,9 +32,9 @@ pipeline {
 
         // Execution of system tests on JOB_TARGET_HOST environment with using container_name pytest3 (custom build)
         stage('Run tests on target environment') {
-            environment {
-               TARGET_HOST = "${params.JOB_TARGET_HOST}"
-            }
+            // environment {
+            //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
+            // }
             steps {
                 container('pytest3') {
                     catchError {
