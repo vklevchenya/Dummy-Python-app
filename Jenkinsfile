@@ -19,28 +19,19 @@ pipeline {
         stages {
         stage('Checkout App') {
             steps {
-                checkout scmGit([
-                        branches: [[name: "*/${params.BRANCH}"]],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions: [
-                            [$class: 'CloneOption', noTags: false, reference: '', shallow: false]
-                        ]
-                ])
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/your/repo.git']]])
             }
         }
 
-        // Execution of system tests on JOB_TARGET_HOST environment with using container_name pytest3 (custom build)
-        stage('Run tests on target environment') {
-            // environment {
-            //    TARGET_HOST = "${params.JOB_TARGET_HOST}"
-            // }
+        stage('Build Python app') {
             steps {
-                container('pytest3') {
-                    catchError {
-                        bat "pip install -r requirements.txt"
-                        bat "pytest -n ${params.THREADS_COUNTER} -k '${params.TESTS_SCOPE}' --junitxml=out_report.xml"
-                    }
-                }
+                bat 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                bat "pytest -n ${params.THREADS_COUNTER} -k '${params.TESTS_SCOPE}' --junitxml=out_report.xml"
             }
         }
 
