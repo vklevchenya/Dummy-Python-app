@@ -8,7 +8,7 @@ pipeline {
     // Added trigger for execution of pipeline hourly
     triggers {
         // cron('15 * * * *')
-        webhook('* * * * *')
+        pollSCM('*/1 * * * *')
     }
 
     parameters {
