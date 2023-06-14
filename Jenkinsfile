@@ -19,8 +19,7 @@ pipeline {
         stages {
         stage('Checkout App') {
             steps {
-                checkout([
-                        $class: 'GitSCM',
+                checkout scmGit([
                         branches: [[name: "*/${params.BRANCH}"]],
                         doGenerateSubmoduleConfigurations: false,
                         extensions: [
