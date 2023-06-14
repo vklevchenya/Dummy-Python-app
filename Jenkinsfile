@@ -62,10 +62,10 @@ pipeline {
     }
 
         // Post-execution steps: store report and send Slack notification in case, if build is failed
-    post {
-        always {
-            junit '**/*_report.xml'
-        }
+    // post {
+    //     always {
+    //         junit '**/*_report.xml'
+    //     }
         // fixed {
         //     slackSend color: 'good',
         //     message: "Build is back to normal: ${env.JOB_NAME} " +
@@ -81,5 +81,5 @@ pipeline {
         //     "${failed_tests_content}\n",
         //     tokenCredentialId: 'slack-integration-token'
         // }
-    }
+    // }
 }
