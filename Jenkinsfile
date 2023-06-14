@@ -17,18 +17,18 @@ pipeline {
     }
 
         stages {
-        stage('Checkout App') {
-            steps {
-                checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: "*/${params.BRANCH}"]],
-                        doGenerateSubmoduleConfigurations: false,
-                        extensions: [
-                            [$class: 'CloneOption', noTags: false, reference: '', shallow: false]
-                        ]
-                ])
-            }
-        }
+        // stage('Checkout App') {
+        //     steps {
+        //         checkout([
+        //                 $class: 'GitSCM',
+        //                 branches: [[name: "*/${params.BRANCH}"]],
+        //                 doGenerateSubmoduleConfigurations: false,
+        //                 extensions: [
+        //                     [$class: 'CloneOption', noTags: false, reference: '', shallow: false]
+        //                 ]
+        //         ])
+        //     }
+        // }
 
         // Execution of system tests on JOB_TARGET_HOST environment with using container_name pytest3 (custom build)
         stage('Run tests on target environment') {
